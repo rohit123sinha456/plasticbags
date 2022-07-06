@@ -181,7 +181,7 @@ if __name__ =="__main__":
     with tf.device('GPU:0'):
         model.compile(
         optimizer=tf.keras.optimizers.SGD(learning_rate=0.005, momentum=0.9), 
-        loss=tf.keras.losses.CategoricalCrossentropy(from_logits=True, label_smoothing=0.1),
+        loss=tf.keras.losses.CategoricalCrossentropy(label_smoothing=0.1),
         metrics=['accuracy'])
 
         steps_per_epoch = train_size // BATCH_SIZE
