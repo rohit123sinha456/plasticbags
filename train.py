@@ -173,7 +173,7 @@ if __name__ =="__main__":
         tf.keras.layers.InputLayer(input_shape=IMAGE_SIZE + (3,)),
         hub.KerasLayer(model_handle, trainable=do_fine_tuning),
         tf.keras.layers.Dropout(rate=0.2),
-        tf.keras.layers.Dense(len(class_names),activation=tf.keras.activations.softmax,
+        tf.keras.layers.Dense(len(class_names),
                             kernel_regularizer=tf.keras.regularizers.l2(0.0001))
     ])
     model.build((None,)+IMAGE_SIZE+(3,))
@@ -181,7 +181,7 @@ if __name__ =="__main__":
     with tf.device('GPU:0'):
         model.compile(
         optimizer=tf.keras.optimizers.SGD(learning_rate=0.005, momentum=0.9), 
-        loss=tf.keras.losses.CategoricalCrossentropy(label_smoothing=0.1),
+        loss=tf.keras.losses.CategoricalCrossentropy(from_logits=True,label_smoothing=0.1),
         metrics=['accuracy'])
 
         steps_per_epoch = train_size // BATCH_SIZE
