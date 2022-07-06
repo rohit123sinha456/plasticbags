@@ -188,10 +188,10 @@ if __name__ =="__main__":
         validation_steps = valid_size // BATCH_SIZE
         hist = model.fit(
             train_ds,
-            epochs=5, steps_per_epoch=steps_per_epoch,
+            epochs=10, steps_per_epoch=steps_per_epoch,
             validation_data=val_ds,
             validation_steps=validation_steps).history
         model.save("trained_model")
-        with open("test", "wb") as fp:   #Pickling
+        with open("history", "wb") as fp:   #Pickling
             pickle.dump(hist, fp)
         print("Model Saved and training done")
