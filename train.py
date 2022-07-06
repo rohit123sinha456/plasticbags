@@ -173,7 +173,7 @@ if __name__ =="__main__":
         tf.keras.layers.InputLayer(input_shape=IMAGE_SIZE + (3,)),
         hub.KerasLayer(model_handle, trainable=do_fine_tuning),
         tf.keras.layers.Dropout(rate=0.2),
-        tf.keras.layers.Dense(len(class_names),
+        tf.keras.layers.Dense(len(class_names),activation=tf.keras.activations.softmax,
                             kernel_regularizer=tf.keras.regularizers.l2(0.0001))
     ])
     model.build((None,)+IMAGE_SIZE+(3,))
